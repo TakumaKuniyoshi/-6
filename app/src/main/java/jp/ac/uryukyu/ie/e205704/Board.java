@@ -54,7 +54,7 @@ public class Board implements ActionListener{
         int x = data/8; 
         int y = data%8;
 
-        if(Piece.p[x+1][y+1] == Piece.NULL){
+        if(Piece.p[x+1][y+1] == Piece.NULL && Check.notChecker(x+1, y+1)){
             Piece.doRev(x+1,y+1);
             Piece.p[x+1][y+1] = Piece.turn;
             putPiece(); 

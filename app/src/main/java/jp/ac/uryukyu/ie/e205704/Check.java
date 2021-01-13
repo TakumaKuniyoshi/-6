@@ -20,4 +20,31 @@ public class Check {
             my += j;
         }
     }
+    public static boolean notChecker(int sx ,int sy){
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (!(i == 0 && j == 0)) {
+                    int cnt = 0;
+                    int mx = sx + i;
+                    int my = sy + j;
+                    while (true) {
+
+                        if (Piece.p[mx][my] <= 0) {
+                            break;
+                        }
+                        if (Piece.p[mx][my] == Piece.turn) {
+                            if (cnt > 0) {
+                                return true;
+                            }
+                            break;
+                        }
+                        mx += i;
+                        my += j;
+                        cnt += 1;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
