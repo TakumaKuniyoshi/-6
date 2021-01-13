@@ -65,5 +65,22 @@ public class Board implements ActionListener{
             }
         }
     }
+    public void putPiece(){ 
+         
+        for(int i=0; i<100; i++) 
+        { 
+            int x = i/10; 
+            int y = i%10; 
+             
+            if(Piece.p[x][y] == Piece.BLACK) 
+            { 
+                pButton[x-1][y-1].setText("●");             
+            } 
+            else if(Piece.p[x][y] == Piece.WHITE) 
+            { 
+                pButton[x-1][y-1].setText("○"); 
+            } 
+        } 
+    }
     
 }
