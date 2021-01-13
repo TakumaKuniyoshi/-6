@@ -34,5 +34,14 @@ public class Piece extends JButton{
         p[5][4] = WHITE;         // 初期配置 
          
     } 
+    public static void doRev(int sx, int sy){ 
+        for(int i=-1;i<=1;i++){
+            for(int j=-1;j<=1;j++){
+                if(!(i==0 && j==0)){
+                    Check.PieceChecker(i,j,sx,sy);
+                }
+            }
+        }
+    }
 }
 
