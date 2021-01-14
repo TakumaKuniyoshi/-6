@@ -52,23 +52,20 @@ public class Check {
     }
 
     public static boolean finChecker(){
-        for(int x=1; x<=8; x++){
-            for(int y=1;y<=8;y++){
-                if(Piece.p[x][y] == Piece.NULL){
-                        return false;
-                }
-            }
-        }
-        winchecker();
-        return true;
-    }
-
-    public static void winchecker(){
+        int nullCnt = 0;
         int blackCnt = 0;
         int whiteCnt = 0;
         for(int x=1; x<=8; x++){
             for(int y=1;y<=8;y++){
-                if(Piece.p[x][y] == Piece.BLACK){
+                if(Piece.p[x][y] == Piece.NULL){
+                    if(notChecker(x, y, Piece.BLACK) || notChecker(x,y,Piece.WHITE)){
+                        return false;
+                    }
+                    else{
+                        nullCnt++;
+                    }
+                }
+                else if(Piece.p[x][y] == Piece.BLACK){
                     blackCnt++;
                 }
                 else if(Piece.p[x][y] == Piece.WHITE){
@@ -76,15 +73,19 @@ public class Check {
                 }
             }
         }
-        System.out.printf("黒 : %d\n白 : %d\n",blackCnt,whiteCnt);
+        if(blackCnt == 0 || whiteCnt == 0 || nullCnt == 0){
+            result(blackCnt,whiteCnt);
+            return true;
+        }
+        result(blackCnt,whiteCnt);
+        return true;
     }
+
+    public static void result(int b,int w){
+        System.out.printf("黒 : %d\n白 : %d\n",b,w);
+    }
+
     public static boolean passChecker(int turn){
-        if(turn == Piece.BLACK){
-            bb = true;
-        }
-        else{
-            ww = true;
-        }
         int nullCnt = 0;
         for(int x=1; x<=8; x++){
             for(int y=1;y<=8;y++){
@@ -97,14 +98,8 @@ public class Check {
             }
         }
         if(nullCnt > 0){
-            ww=false;
-            bb=false;
             return false;
         }
-        else if(bb && ww){
-            winchecker();
-        }
-        
         return true;
     }
 }
