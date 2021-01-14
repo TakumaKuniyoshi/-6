@@ -4,9 +4,13 @@ import javax.swing.JButton;
 
 public class Piece extends JButton{ 
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     static int[][] p = new int[10][10];
-    public static final int OUT =-1;         //盤外 
-    public static final int NULL = 0;              //コマが無いマス 
+    static final int OUT =-1;         //盤外 
+    static final int NULL = 0;        //コマが無いマス 
     public static final int BLACK = 1; 
     public static final int WHITE = 2; 
 

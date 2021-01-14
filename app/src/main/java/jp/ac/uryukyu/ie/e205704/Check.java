@@ -1,5 +1,7 @@
 package jp.ac.uryukyu.ie.e205704;
 
+import java.awt.Color; 
+
 public class Check {
     static boolean check = true;
     static boolean bb = false;
@@ -82,7 +84,22 @@ public class Check {
     }
 
     public static void result(int b,int w){
-        System.out.printf("黒 : %d\n白 : %d\n",b,w);
+        String bString = String.valueOf(b);
+        String wString = String.valueOf(w);
+        if(b > w){
+            Board.header("黒の勝ち 　黒 : "+bString+"  白 : "+wString,Color.BLACK,Color.WHITE);
+        }
+        else if(b < w){
+            Board.header("白の勝ち 　黒 : "+bString+"  白 : "+wString,Color.WHITE,Color.BLACK);
+        }
+        else{
+            if(Piece.turn == Piece.BLACK){
+                Board.header("引き分け",Color.BLACK,Color.WHITE);
+            }
+            else{
+                Board.header("引き分け",Color.WHITE,Color.BLACK);
+            }
+        }
     }
 
     public static boolean passChecker(int turn){

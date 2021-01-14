@@ -17,8 +17,8 @@ public class Board implements ActionListener{
 
     Piece[][] pButton;
 
-    JFrame frame = new JFrame("リバーシ");
-    JPanel panel = new JPanel();
+    static JFrame frame = new JFrame("リバーシ");
+    static JPanel panel = new JPanel();
     JButton[][] b = new JButton[8][8]; 
 
     public Board(){
@@ -27,6 +27,7 @@ public class Board implements ActionListener{
         frame.setSize(680,750);
         panel.setLayout(null);
         panel.setBackground(new Color(44,144,59));
+        header("スタート　黒の番です",Color.BLACK,Color.WHITE);
         frame.add(panel);
 
         pButton = new Piece[8][8];
@@ -73,6 +74,12 @@ public class Board implements ActionListener{
                 }
             }
         }
+        if(Piece.turn == Piece.BLACK){
+            header("黒の番です",Color.BLACK,Color.WHITE);
+        }
+        else{
+            header("白の番です",Color.WHITE,Color.BLACK);
+        }
         Check.finChecker();
     }
     public void putPiece(){ 
@@ -93,4 +100,29 @@ public class Board implements ActionListener{
         } 
     }
     
+    public static void header(String str,Color winc,Color losc){
+        Dimension headerPanelDimension = new Dimension(640, 50);
+		JPanel headerPanel = setPanel(winc, headerPanelDimension);
+		JLabel headerLabel = new JLabel(str);
+		headerLabel = setFont(losc,headerLabel,24);
+		headerPanel.add(headerLabel);
+		frame.add(headerPanel,BorderLayout.NORTH);
+        frame.add(panel);  
+    }
+
+    public static JPanel setPanel(Color color, Dimension PanelDimension) {
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(PanelDimension);
+		panel.setLayout(new BorderLayout());
+		panel.setBackground(color);
+        return(panel);
+    }
+    public static JLabel setFont(Color clr,JLabel label,int strSize) {
+		label.setForeground(clr);
+		Font labelFont = new Font("ＭＳ ゴシック",Font.PLAIN,strSize);
+		label.setFont(labelFont);
+		label.setHorizontalAlignment(JLabel.CENTER);
+		label.setVerticalAlignment(JLabel.CENTER);
+		return(label);
+    }
 }
