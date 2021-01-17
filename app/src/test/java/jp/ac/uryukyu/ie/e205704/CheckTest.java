@@ -12,7 +12,7 @@ public class CheckTest {
      *  (3) 全部黒になっているはずなのでfinChecker()がtrueを返すことを期待。
      */
     @Test
-    void attackWithWeponSkillTest() {
+    void finCheckerTest() {
         Board demoBoard = new Board();
         Piece demoPiece = new Piece();
         
