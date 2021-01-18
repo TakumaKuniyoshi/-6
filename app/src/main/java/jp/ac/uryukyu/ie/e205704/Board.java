@@ -13,6 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+/**
+ * ウィンドウ、ボタンの設置
+ */
 public class Board implements ActionListener{
 
     Piece[][] pButton;
@@ -21,6 +24,9 @@ public class Board implements ActionListener{
     static JPanel panel = new JPanel();
     JButton[][] b = new JButton[8][8]; 
 
+    /**
+     * コンストラクタ
+     */
     public Board(){
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -47,6 +53,10 @@ public class Board implements ActionListener{
             panel.add(pButton[x][y]); 
         }
     }
+
+    /**
+     * ボタンを押された時に動作するメソッド
+     */
     public void actionPerformed(ActionEvent e) { 
         String str = e.getActionCommand(); 
         System.out.println(str); 
@@ -54,7 +64,7 @@ public class Board implements ActionListener{
          
         int x = data/8; 
         int y = data%8;
-        if(Piece.p[x+1][y+1] == Piece.NULL && Check.notChecker(x+1, y+1,Piece.turn)){
+        if(Check.notChecker(x+1, y+1,Piece.turn)){
             Piece.doRev(x+1,y+1);
             Piece.p[x+1][y+1] = Piece.turn;
             putPiece(); 
@@ -74,15 +84,14 @@ public class Board implements ActionListener{
                 }
             }
         }
-        if(Piece.turn == Piece.BLACK){
-            header("黒の番です",Color.BLACK,Color.WHITE);
-        }
-        else{
-            header("白の番です",Color.WHITE,Color.BLACK);
-        }
+        Check.turnCheck();
         Check.finChecker();
     }
-    public void putPiece(){ 
+
+    /**
+     * 黒と白のコマを設置。
+     */
+    public void putPiece(){
          
         for(int i=0; i<100; i++) 
         { 
@@ -100,6 +109,12 @@ public class Board implements ActionListener{
         } 
     }
     
+    /**
+     * ヘッダーを作成。
+     * @param str　出力する文字
+     * @param winc　今のターンの色
+     * @param losc　もう一つの色
+     */
     public static void header(String str,Color winc,Color losc){
         Dimension headerPanelDimension = new Dimension(640, 50);
 		JPanel headerPanel = setPanel(winc, headerPanelDimension);
@@ -110,6 +125,12 @@ public class Board implements ActionListener{
         frame.add(panel);  
     }
 
+    /**
+     * ヘッダーの背景を設定。
+     * @param color　背景色
+     * @param PanelDimension　ヘッダーのサイズ
+     * @return　ヘッダーの背景
+     */
     public static JPanel setPanel(Color color, Dimension PanelDimension) {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(PanelDimension);
@@ -117,6 +138,14 @@ public class Board implements ActionListener{
 		panel.setBackground(color);
         return(panel);
     }
+
+    /**
+     * ヘッダーの文字の設定
+     * @param clr　文字の色
+     * @param label　ヘッダーに出力させる文字
+     * @param strSize　フォントサイズ
+     * @return ヘッダーの文字
+     */
     public static JLabel setFont(Color clr,JLabel label,int strSize) {
 		label.setForeground(clr);
 		Font labelFont = new Font("ＭＳ ゴシック",Font.PLAIN,strSize);

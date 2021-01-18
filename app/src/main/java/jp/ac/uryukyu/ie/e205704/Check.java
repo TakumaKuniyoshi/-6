@@ -37,7 +37,7 @@ public class Check {
                         if (Piece.p[mx][my] <= 0) {
                             break;
                         }
-                        if (Piece.p[mx][my] == turn) {
+                        if (Piece.p[mx][my] == turn && Piece.p[sx][sy] == Piece.NULL) {
                             if (cnt > 0) {
                                 return true;
                             }
@@ -118,5 +118,14 @@ public class Check {
             return false;
         }
         return true;
+    }
+
+    public static void turnCheck(){
+        if(Piece.turn == Piece.BLACK){
+            Board.header("黒の番です",Color.BLACK,Color.WHITE);
+        }
+        else{
+            Board.header("白の番です",Color.WHITE,Color.BLACK);
+        }
     }
 }
